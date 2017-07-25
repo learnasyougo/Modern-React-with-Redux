@@ -5,16 +5,17 @@ export default connect(mapStateToProps)(
     class BookDetail extends Component {
         render() {
             if (!this.props.selectedBook) {
-                return (<span>No book selected.</span>);
+                return (
+                    <div className="col-sm-4">
+                        <h3>No book selected</h3>
+                    </div>
+                );
             }
 
             return (
-                <div>
-                    <ul className="list-group col-sm-4">
-                        <li>
-                            {this.props.selectedBook.title}
-                        </li>
-                    </ul>
+                <div className="col-sm-4">
+                    <h3>Details for:</h3>
+                    <span>{this.props.selectedBook.title}</span>
                 </div>
             );
         }
