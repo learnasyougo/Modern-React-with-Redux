@@ -15,7 +15,8 @@ export default connect(mapStateToProps)(
             return (
                 <div className="col-sm-4">
                     <h3>Details for:</h3>
-                    <span>{this.props.selectedBook.title}</span>
+                    <div>Title: {this.props.selectedBook.title}</div>
+                    <div>Pages: {this.props.selectedBook.pages}</div>
                 </div>
             );
         }

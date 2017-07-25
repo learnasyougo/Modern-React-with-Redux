@@ -1,7 +1,7 @@
 export default function (state = null, action) {
     return [
-        { title: 'Javascript: The Good Parts' },
-        { title: 'C# In Depth' },
-        { title: 'The Dark Tower' }
+        { title: 'Javascript: The Good Parts', pages: 101 },
+        { title: 'C# In Depth', pages: 350 },
+        { title: 'The Dark Tower', pages: 254 }
     ];
 }
