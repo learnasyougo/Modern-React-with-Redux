@@ -1,52 +1,67 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-export default reduxForm({ form: 'NewPostForm' })(
+export default reduxForm({ validate, form: 'NewPostForm' })(
     class NewPost extends Component {
-        renderTitleField(field) {
+        renderField(field) {
+            const inputClassName = field.meta.error && field.meta.touched ? 'form-group has-danger' : 'form-group';
+
             return (
-                <div className="form-group">
-                    <label htmlFor="title">Title</label>
+                <div className={inputClassName}>
+                    <label htmlFor={field.name}>{field.label}</label>
                     <input
                         {...field.input}
-                        id="title"
                         className="form-control"
                         type="text"
                     />
+                    <span className="text-help">{field.meta.touched ? field.meta.error : ''}</span>
                 </div>
             );
         }
 
-        renderCategoryField(field) {
-            return (
-                <div className="form-group">
-                    <label htmlFor="categories">Categories</label>
-                    <input
-                        {...field.input}
-                        id="categories"
-                        className="form-control"
-                        type="text"
-                    />
-                </div>
-            );
+        onSubmit(values) {
+
         }
 
         render() {
+            const { handleSubmit } = this.props;
+
             return (
                 <div>
                     <h3>Add new post</h3>
-                    <form>
+                    <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                         <Field
-                            name="title"
-                            component={this.renderTitleField}
+                            name="title" label="Title"
+                            component={this.renderField}
                         />
                         <Field
-                            name="categories"
-                            component={this.renderCategoryField}
+                            name="categories" label="Categories"
+                            component={this.renderField}
                         />
+                        <Field
+                            name="content" label="Content"
+                            component={this.renderField}
+                        />
+                        <button type="submit" className="btn btn-primary">Submit</button>
                     </form>
                 </div>
             );
         }
     }
 );
+
+function validate(values) {
+    let errors = {};
+
+    if (!values.title || values.title.length < 3) {
+        errors.title = 'Enter a title that is at least three characters long';
+    }
+    if (!values.categories) {
+        errors.categories = 'Enter at least one category';
+    }
+    if (!values.content) {
+        errors.content = 'Enter some content';
+    }
+
+    return errors;
+}
