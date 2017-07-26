@@ -1,11 +1,46 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getPosts } from '../../actions';
 
-export default class PostList extends Component {
-    render() {
-        return (
-            <div>
-                <h3>Posts</h3>
-            </div>
-        );
-    }
+function mapStateToProps(state) {
+    return { posts: state.posts };
 }
+
+export default connect(mapStateToProps, { getPosts })(
+    class PostList extends Component {
+        componentDidMount() {
+            this.props.getPosts();
+        }
+
+        renderPostList() {
+            if (!this.props.posts) {
+                return (
+                    <span>No posts available, <a href="#">try writing your first one!</a></span>
+                );
+            } else {
+                return (
+                    <ul className="list-group">
+                        {_.map(this.props.posts, this.renderPostListItem)}
+                    </ul>
+                );
+            }
+        }
+        renderPostListItem(post) {
+            return (
+                <li key={post.id} className="list-group-item post-item">
+                    {post.title}
+                </li>
+            );
+        }
+
+        render() {
+            return (
+                <div>
+                    <h3>Posts</h3>
+                    {this.renderPostList()}
+                </div>
+            );
+        }
+    }
+);

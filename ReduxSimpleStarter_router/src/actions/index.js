@@ -9,7 +9,18 @@ function buildRequest(endpoint) {
 }
 
 export function getPosts() {
-    const request = axios.get(buildRequest('/posts'));
+    const requestUrl = buildRequest('/posts');
+    const request = axios.get(requestUrl);
+
+    return {
+        type: FETCH_POSTS,
+        payload: request
+    };
+}
+
+export function addNewPost() {
+    const requestUrl = buildRequest('/posts');
+    const request = axios.get(requestUrl);
 
     return {
         type: FETCH_POSTS,

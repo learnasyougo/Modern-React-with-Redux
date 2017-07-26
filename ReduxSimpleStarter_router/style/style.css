@@ -22,3 +22,12 @@ section#body {
   margin-left: 20px;
   display: block;
 }
+
+li.post-item {
+  cursor: pointer;
+  user-select: none;
+}
+
+li.post-item:hover {
+  background-color: #efefef;
+}
