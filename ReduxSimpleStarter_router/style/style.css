@@ -31,3 +31,11 @@ li.post-item {
 li.post-item:hover {
   background-color: #efefef;
 }
+
+form label {
+  font-weight: bold;
+}
+
+form a {
+  margin-left: 5px;
+}
