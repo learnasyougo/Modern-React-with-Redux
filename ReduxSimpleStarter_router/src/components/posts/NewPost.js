@@ -4,7 +4,9 @@ import { Field, reduxForm } from 'redux-form';
 export default reduxForm({ validate, form: 'NewPostForm' })(
     class NewPost extends Component {
         renderField(field) {
-            const inputClassName = field.meta.error && field.meta.touched ? 'form-group has-danger' : 'form-group';
+            const inputClassName = field.meta.error && field.meta.touched
+                ? 'form-group has-danger'
+                : 'form-group';
 
             return (
                 <div className={inputClassName}>
