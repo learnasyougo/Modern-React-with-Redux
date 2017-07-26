@@ -27,7 +27,9 @@ export default reduxForm({ validate, form: 'NewPostForm' })(
             }
 
             onSubmit(values) {
-                this.props.addNewPost(values);
+                this.props.addNewPost(values, () => {
+                    this.props.history.push('/');
+                });
             }
 
             render() {

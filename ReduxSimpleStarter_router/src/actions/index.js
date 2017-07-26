@@ -18,9 +18,11 @@ export function getPosts() {
 }
 
 export const ADD_NEW_POST = 'add_new_post';
-export function addNewPost(values) {
+export function addNewPost(values, navigationCallback) {
     const requestUrl = buildRequest('/posts');
-    const request = axios.post(requestUrl, values);
+    const request = axios
+        .post(requestUrl, values)
+        .then(() => navigationCallback());
 
     return {
         type: ADD_NEW_POST,
