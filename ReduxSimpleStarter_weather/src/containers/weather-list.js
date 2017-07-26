@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import WeatherChart from '../components/weather-chart';
+import CityMap from '../components/city-map';
 
 function mapStateToProps({ weather }) {
     return { weather };
@@ -17,6 +18,7 @@ export default connect(mapStateToProps)(
         }
         renderCity(weatherData) {
             const { city, list: data } = weatherData;
+            const { lon, lat } = city.coord;
 
             const temperaturesKelvin = data.map(data => data.main.temp);
             const temperaturesCelsius = temperaturesKelvin.map(kelvin => kelvin - 273.15);
@@ -25,7 +27,10 @@ export default connect(mapStateToProps)(
 
             return (
                 <tr key={city.name}>
-                    <td>{city.name}</td>
+                    <td>
+                        <strong>{city.name}</strong>
+                        <CityMap lon={lon} lat={lat} />
+                    </td>
                     <td>
                         <WeatherChart data={temperaturesCelsius} color="orange" units="°C" />
                     </td>
