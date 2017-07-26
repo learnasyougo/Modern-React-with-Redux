@@ -18,7 +18,8 @@ export default connect(mapStateToProps)(
         renderCity(weatherData) {
             const { city, list: data } = weatherData;
 
-            const temperatures = data.map(data => data.main.temp);
+            const temperaturesKelvin = data.map(data => data.main.temp);
+            const temperaturesCelsius = temperaturesKelvin.map(kelvin => kelvin - 273.15);
             const humidities = data.map(data => data.main.humidity);
             const pressures = data.map(data => data.main.pressure);
 
@@ -26,13 +27,13 @@ export default connect(mapStateToProps)(
                 <tr key={city.name}>
                     <td>{city.name}</td>
                     <td>
-                        <WeatherChart data={temperatures} />
+                        <WeatherChart data={temperaturesCelsius} color="orange" units="°C" />
                     </td>
                     <td>
-                        <WeatherChart data={humidities} />
+                        <WeatherChart data={humidities} color="green" units="hPa" />
                     </td>
                     <td>
-                        <WeatherChart data={pressures} />
+                        <WeatherChart data={pressures} color="blue" units="%" />
                     </td>
                 </tr>
             );
@@ -44,9 +45,9 @@ export default connect(mapStateToProps)(
                     <thead>
                         <tr>
                             <th>City</th>
-                            <th>Temperature</th>
-                            <th>Pressure</th>
-                            <th>Humidity</th>
+                            <th>Temperature (°C)</th>
+                            <th>Pressure (hPa)</th>
+                            <th>Humidity (%)</th>
                         </tr>
                     </thead>
                     <tbody>
