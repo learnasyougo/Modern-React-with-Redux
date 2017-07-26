@@ -1,11 +1,25 @@
-export default function (state = null, action) {
+import {
+    FETCH_WEATHER
+} from '../actions/index';
+
+export default function (state = [], action) {
     logAction(action);
-    return state;
+
+    let newState = state;
+
+    switch (action.type) {
+        case FETCH_WEATHER:
+            newState = [action.payload.data, ...state];
+    }
+
+    console.log('Current state:', newState);
+
+    return newState;
 }
 
 function logAction(action) {
     if (action) {
-        if (action.type === 'FETCH_WEATHER') {
+        if (action.type === FETCH_WEATHER) {
             console.groupCollapsed(`RECEIVED ACTION '${action.type}' for '${action.payload.data.city.name}'`);
         } else {
             console.groupCollapsed(`RECEIVED ACTION '${action.type}'`);
