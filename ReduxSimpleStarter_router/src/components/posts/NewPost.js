@@ -4,19 +4,20 @@ import { Field, reduxForm } from 'redux-form';
 export default reduxForm({ validate, form: 'NewPostForm' })(
     class NewPost extends Component {
         renderField(field) {
-            const inputClassName = field.meta.error && field.meta.touched
+            const { meta: { touched, error }, name, label, input } = field;
+            const inputClassName = error && touched
                 ? 'form-group has-danger'
                 : 'form-group';
 
             return (
                 <div className={inputClassName}>
-                    <label htmlFor={field.name}>{field.label}</label>
+                    <label htmlFor={name}>{label}</label>
                     <input
-                        {...field.input}
+                        {...input}
                         className="form-control"
                         type="text"
                     />
-                    <span className="text-help">{field.meta.touched ? field.meta.error : ''}</span>
+                    <span className="text-help">{touched ? error : ''}</span>
                 </div>
             );
         }
