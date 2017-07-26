@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPosts } from '../../actions';
 
@@ -16,7 +17,7 @@ export default connect(mapStateToProps, { getPosts })(
         renderPostList() {
             if (!this.props.posts) {
                 return (
-                    <span>No posts available, <a href="#">try writing your first one!</a></span>
+                    <span>No posts available, <Link to="/posts/new">try writing your first one</Link>!</span>
                 );
             } else {
                 return (
@@ -37,6 +38,11 @@ export default connect(mapStateToProps, { getPosts })(
         render() {
             return (
                 <div>
+                    <div className="text-xs-right">
+                        <Link to="/posts/new" className="btn btn-primary">
+                            Add new post
+                        </Link>
+                    </div>
                     <h3>Posts</h3>
                     {this.renderPostList()}
                 </div>

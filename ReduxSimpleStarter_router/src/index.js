@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import PostList from './components/posts/PostList';
 import NewPost from './components/posts/NewPost';
@@ -21,8 +21,10 @@ ReactDOM.render(
           <h1>Bloggy</h1>
         </section>
         <section id="body">
-          <Route path="/" component={PostList} />
-          <Route path="/posts/new" component={NewPost} />
+          <Switch>
+            <Route path="/posts/new" component={NewPost} />
+            <Route path="/" component={PostList} />
+          </Switch>
         </section>
       </div>
     </BrowserRouter>

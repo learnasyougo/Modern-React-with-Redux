@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addNewPost } from '../../actions';
+import { Field, reduxForm } from 'redux-form';
 
-export default connect(null, { addNewPost })(
+export default reduxForm({ form: 'NewPostForm' })(
     class NewPost extends Component {
         render() {
             return (
