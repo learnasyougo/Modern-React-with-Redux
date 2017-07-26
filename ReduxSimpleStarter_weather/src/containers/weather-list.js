@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import WeatherChart from '../components/weather-chart';
+
 function mapStateToProps({ weather }) {
     return { weather };
 }
@@ -14,12 +16,24 @@ export default connect(mapStateToProps)(
                 .map(w => this.renderCity(w));
         }
         renderCity(weatherData) {
+            const { city, list: data } = weatherData;
+
+            const temperatures = data.map(data => data.main.temp);
+            const humidities = data.map(data => data.main.humidity);
+            const pressures = data.map(data => data.main.pressure);
+
             return (
-                <tr key={weatherData.city.name}>
-                    <td>{weatherData.city.name}</td>
-                    <td><img src="http://placehold.it/140x100" /></td>
-                    <td><img src="http://placehold.it/140x100" /></td>
-                    <td><img src="http://placehold.it/140x100" /></td>
+                <tr key={city.name}>
+                    <td>{city.name}</td>
+                    <td>
+                        <WeatherChart data={temperatures} />
+                    </td>
+                    <td>
+                        <WeatherChart data={humidities} />
+                    </td>
+                    <td>
+                        <WeatherChart data={pressures} />
+                    </td>
                 </tr>
             );
         }
