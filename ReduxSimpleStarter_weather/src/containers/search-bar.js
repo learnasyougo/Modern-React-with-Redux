@@ -23,7 +23,6 @@ export default connect(null, mapDispatchToProps)(
         onSubmit(event) {
             event.preventDefault();
             const searchTerm = this.state.searchTerm;
-            console.info(`Searching weather information for city '${searchTerm}'.`);
             this.props.fetchWeather(searchTerm);
             this.setState({ searchTerm: '' });
         }

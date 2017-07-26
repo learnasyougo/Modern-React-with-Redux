@@ -1,4 +1,3 @@
-import promiseMiddleware from 'redux-promise';
 import axios from 'axios';
 
 const openWeatherMap = {
@@ -13,8 +12,6 @@ export const FETCH_WEATHER = 'FETCH_WEATHER';
 
 export function fetchWeather(city, country = 'BE') {
     const requestUrl = openWeatherMap.API.generateUrl(city, country);
-    console.info(`Built '${FETCH_WEATHER}' request URL '${requestUrl}'.`);
-
     const request = axios.get(requestUrl);
 
     return {
