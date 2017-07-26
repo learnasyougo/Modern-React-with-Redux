@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-export const FETCH_POSTS = 'fetch_posts';
-
 const apiRootUrl = 'http://reduxblog.herokuapp.com/api';
 const apiKey = 'gDurknsiof';
 function buildRequest(endpoint) {
     return `${apiRootUrl}${endpoint}?key=${apiKey}`;
 }
 
+export const FETCH_POSTS = 'fetch_posts';
 export function getPosts() {
     const requestUrl = buildRequest('/posts');
     const request = axios.get(requestUrl);
@@ -18,12 +17,13 @@ export function getPosts() {
     };
 }
 
-export function addNewPost() {
+export const ADD_NEW_POST = 'add_new_post';
+export function addNewPost(values) {
     const requestUrl = buildRequest('/posts');
-    const request = axios.get(requestUrl);
+    const request = axios.post(requestUrl, values);
 
     return {
-        type: FETCH_POSTS,
+        type: ADD_NEW_POST,
         payload: request
     };
 }
