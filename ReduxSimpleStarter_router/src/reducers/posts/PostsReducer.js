@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {
     FETCH_POSTS,
     FETCH_POST,
+    DELETE_POST,
     ADD_NEW_POST
 } from '../../actions/index'
 

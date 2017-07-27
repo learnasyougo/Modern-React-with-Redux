@@ -22,10 +22,19 @@ export function getPosts() {
 export const FETCH_POST = 'fetch_post';
 export function getPost(id) {
     const requestUrl = buildRequest(`/posts/${id}`);
-    console.log(requestUrl);
     const request = axios.get(requestUrl);
 
     return buildAction(FETCH_POST, request);
+}
+
+export const DELETE_POST = 'delete_post';
+export function deletePost(id, navigationCallback) {
+    const requestUrl = buildRequest(`/posts/${id}`);
+    const request = axios
+        .delete(requestUrl)
+        .then(() => navigationCallback());
+
+    return buildAction(DELETE_POST, id);
 }
 
 export const ADD_NEW_POST = 'add_new_post';
