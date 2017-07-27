@@ -21,7 +21,8 @@ export function getPosts() {
 
 export const FETCH_POST = 'fetch_post';
 export function getPost(id) {
-    const requestUrl = buildRequest(`/post/${id}`);
+    const requestUrl = buildRequest(`/posts/${id}`);
+    console.log(requestUrl);
     const request = axios.get(requestUrl);
 
     return buildAction(FETCH_POST, request);
