@@ -30,7 +30,7 @@ export default connect(mapStateToProps, { getPosts })(
         renderPostListItem(post) {
             return (
                 <li key={post.id} className="list-group-item post-item">
-                    {post.title} <small>{post.id}</small>
+                    <Link to={`/posts/${post.id}`}>{post.title}</Link>
                 </li>
             );
         }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPost } from '../../actions';
 
@@ -11,8 +12,10 @@ function mapStateToProps({ posts }, ownProps) {
 export default connect(mapStateToProps, { getPost })(
     class PostDetail extends Component {
         componentDidMount() {
-            const { id } = this.props.match.params;
-            this.props.getPost(id);
+            if (!this.props.post) {
+                const { id } = this.props.match.params;
+                this.props.getPost(id);
+            }
         }
 
         render() {
@@ -26,6 +29,13 @@ export default connect(mapStateToProps, { getPost })(
 
             return (
                 <div>
+                    <div className="text-xs-right">
+                        <Link to="/" className="btn btn-default">Back to index</Link>
+                        <Link to="/posts/new" className="btn btn-primary">
+                            Add new post
+                        </Link>
+                    </div>
+
                     <h3>{post.title}</h3>
                     <h6>Categories: {post.categories}</h6>
                     <p>{post.content}</p>
