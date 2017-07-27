@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import PostList from './components/posts/PostList';
 import NewPost from './components/posts/NewPost';
+import PostDetail from './components/posts/PostDetail';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -23,6 +24,7 @@ ReactDOM.render(
         <section id="body">
           <Switch>
             <Route path="/posts/new" component={NewPost} />
+            <Route path="/posts/:id" component={PostDetail} />
             <Route path="/" component={PostList} />
           </Switch>
         </section>
